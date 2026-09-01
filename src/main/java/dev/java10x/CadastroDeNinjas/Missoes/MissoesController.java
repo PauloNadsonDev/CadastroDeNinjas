@@ -1,24 +1,32 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("missoes")
+@RequestMapping("/missoes")
 public class MissoesController {
 
-    // GET -> MANDAR UMA REQUISIÇÃO PARA MOSTRAR AS MISSÕES
-    @GetMapping("/listarMissões")
-    String todasMissoes(){return "Todas as missões";}
+    // GET -> Mostrar todas as missões
+    @GetMapping("/listar")
+    String listarMissoes() {
+        return "Todas as missões";
+    }
 
-    // POST -> MANDAR UMA REQUISIÇÃO PARA CRIAR AS MISSÕES
+    // POST -> Criar uma missão
     @PostMapping("/criar")
-    String criarMissao(){return "Missão criada";}
+    String criarMissao() {
+        return "Missão criada";
+    }
 
-    // PUT -> MANDAR UMA REQUISIÇÃO PARA ALTERAR AS MISSÕES
-    @PutMapping("/alterarMissao")
-    String alterarMissao(){return "dados da missão alterada";}
+    // PUT -> Alterar uma missão pelo ID
+    @PutMapping("/alterarID")
+    String alterarMissao() {
+        return "Dados da missão alterados";
+    }
 
-    // DELETE -> MANDAR UMA REQUISIÇÃO PARA DELETAR AS MISSÕES
-    @DeleteMapping("/deletarMissao")
-    String missaoDeletada(){return "Missão deletada";}
-
+    // DELETE -> Deletar uma missão pelo ID
+    @DeleteMapping("/deletarID")
+    String deletarMissao() {
+        return "Missão deletada";
+    }
 }

@@ -16,10 +16,9 @@ public class NinjaController {
 
     // POST -> Criar um ninja
     @PostMapping("/criar")
-    public NinjaModel criarNinja(@RequestBody NinjaModel ninja){
+    public NinjaModel criarNinja(@RequestBody NinjaModel ninja) {
         return ninjaService.criarNinja(ninja);
     }
-
 
     // GET -> Listar todos os ninjas
     @GetMapping("/listar")
@@ -29,7 +28,7 @@ public class NinjaController {
 
     // GET -> Buscar ninja pelo ID
     @GetMapping("/listar/{id}")
-    public NinjaModel listarNinjasPorId(@PathVariable Long id){
+    public NinjaModel listarNinjasPorId(@PathVariable Long id) {
         return ninjaService.listarNinjasPorID(id);
     }
 
@@ -40,8 +39,9 @@ public class NinjaController {
     }
 
     // DELETE -> Deletar ninja pelo ID
-    @DeleteMapping("/deletarID")
-    String deletarNinjaPorID() {
+    @DeleteMapping("/deletar/{id}")
+    String deletarNinjaPorID(@PathVariable Long id) {
+        ninjaService.deletarNinjaPorID(id);
         return "Ninja deletado";
     }
 }

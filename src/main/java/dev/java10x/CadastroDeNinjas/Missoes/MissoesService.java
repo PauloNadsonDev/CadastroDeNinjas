@@ -30,4 +30,9 @@ public class MissoesService {
     public MissoesModel criarMissao(MissoesModel missoesModel){
         return missoesRepository.save(missoesModel);
     }
+
+    // Deletar o ninja - tme que ter void
+    public void deletarMissaoPorID(Long id){
+        missoesRepository.deleteById(id);
+    }
 }

@@ -1,6 +1,7 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +25,9 @@ public class MissoesService {
         Optional<MissoesModel> missoesPorID = missoesRepository.findById(id);
         return missoesPorID.orElse(null);
 }
+
+    // Criar uma nova missão
+    public MissoesModel criarMissao(MissoesModel missoesModel){
+        return missoesRepository.save(missoesModel);
+    }
 }

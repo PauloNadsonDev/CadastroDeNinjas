@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_missoes")
-public class MissoesModel {
+public class    MissoesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,23 +16,23 @@ public class MissoesController {
 
     // GET -> Mostrar todas as missões
     @GetMapping("/listar")
-    List<MissoesModel> listarMissoes(){ return missoesService.listarMissoes(); }
+    List<MissoesDTO> listarMissoes(){ return missoesService.listarMissoes(); }
 
     // Mostrar as missões por ID
     @GetMapping("/listar/{id}")
-    public MissoesModel listarMissoesId(@PathVariable Long id){
+    public MissoesDTO listarMissoesId(@PathVariable Long id){
         return missoesService.listarMissoesID(id);
     }
 
     // POST -> Criar uma missão
     @PostMapping("/criar")
-    MissoesModel criarMissao(@RequestBody MissoesModel missao) {
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missao) {
         return missoesService.criarMissao(missao);
     }
 
     // PUT -> Alterar uma missão pelo ID
     @PutMapping("/alterar/{id}")
-    MissoesModel alterarMissao(@PathVariable Long id, @RequestBody MissoesModel missaoAtualizada) {
+    MissoesDTO alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
         return missoesService.alterarDadosDaMissao(id, missaoAtualizada);
     }
 

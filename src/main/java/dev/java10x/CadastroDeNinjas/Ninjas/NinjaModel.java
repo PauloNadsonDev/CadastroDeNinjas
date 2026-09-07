@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// Entity - Transformar uma classe em uma entidade do banco de dados(BD)
-// JPA = Java Persistence API
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,7 +21,7 @@ public class NinjaModel {
     @Column (name = "nome")
     private String nome;
 
-    @Column(unique = true) // <- Coluna vai ser única
+    @Column(unique = true)
     private String email;
 
     @Column (name = "Img_URL")
@@ -32,10 +30,10 @@ public class NinjaModel {
     @Column (name = "idade")
     private int idade;
 
-    // @ManytoOne (Muitos para um) - Um ninja tem uma única missão
+    @Column(name = "Rank")
+    private String rank;
+
     @ManyToOne
-    @JoinColumn(name = "missoes_id") // Foreing Key ou chave estrangeira
+    @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
-
-
 }

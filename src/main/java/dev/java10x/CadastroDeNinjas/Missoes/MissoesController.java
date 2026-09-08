@@ -1,5 +1,7 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,14 +34,25 @@ public class MissoesController {
 
     // PUT -> Alterar uma missão pelo ID
     @PutMapping("/alterar/{id}")
-    MissoesDTO alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
-        return missoesService.alterarDadosDaMissao(id, missaoAtualizada);
+    ResponseEntity<String> alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
+        if (missoesService.listarMissoesID(id) != null){
+            missoesService.alterarDadosDaMissao(id, missaoAtualizada);
+            return ResponseEntity.ok("Missão por ID: " + id + " Foi atualizada");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A missão: " + id + "Não foi encontrada ou não existe");
+        }
     }
 
-    // DELETE -> Deletar uma missão pelo ID
     @DeleteMapping("/deletar/{id}")
-    String deletarNinjaPorID(@PathVariable Long id){
-        missoesService.deletarMissaoPorID(id);
-        return "Missão deletada";
+    ResponseEntity<String> deletarNinjaPorID(@PathVariable Long id){
+        if (missoesService.listarMissoesID(id) != null) {
+            missoesService.deletarMissaoPorID(id);
+            return ResponseEntity.ok("Missão deletada: " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A missão: " + id + " Não foi encontrada ou não existe");
+        }
+
     }
 }

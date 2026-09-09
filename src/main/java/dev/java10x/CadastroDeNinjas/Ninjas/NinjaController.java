@@ -24,23 +24,32 @@ public class NinjaController {
     }
 
     @GetMapping("/listar")
-    List<NinjaDTO> listarNinjas() {
-        return ninjaService.listarNinjas();
+    ResponseEntity<List<NinjaDTO>> listarNinjas() {
+        List<NinjaDTO> ninjaDTOS = ninjaService.listarNinjas();
+        return ResponseEntity.ok(ninjaDTOS);
     }
 
     @GetMapping("/listar/{id}")
-    public NinjaDTO listarNinjasPorId(@PathVariable Long id) {
-        return ninjaService.listarNinjasPorID(id);
+    public ResponseEntity<?> listarNinjasPorId(@PathVariable Long id) {
+        NinjaDTO ninjas = ninjaService.listarNinjasPorID(id);
+
+        if (ninjas != null){
+            return ResponseEntity.ok(ninjas);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Ninja do id: " + id + " não existe");
+        }
+
     }
 
     @PutMapping("/alterar/{id}")
     ResponseEntity<String> alterarNinja(@PathVariable Long id,@RequestBody NinjaDTO ninjaAtualizado) {
         if (ninjaService.listarNinjasPorID(id) != null){
             ninjaService.atualizarNinja(id, ninjaAtualizado);
-            return ResponseEntity.ok("Ninja por ID :" + id + "Foi atualizado");
+            return ResponseEntity.ok("Ninja por ID :" + id + " foi atualizado");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("O ninja: " + id + "Não foi encontrado ou não existe");
+                    .body("O ninja: " + id + " não foi encontrado ou não existe");
         }
     }
 
